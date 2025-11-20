@@ -1,0 +1,27 @@
+# Core dependencies
+streamlit==1.31.0
+pandas==2.2.0
+numpy==1.26.3
+openpyxl==3.1.2
+
+# Statistical analysis
+scipy==1.12.0
+statsmodels==0.14.1
+scikit-learn==1.4.0
+
+# Visualization
+plotly==5.18.0
+matplotlib==3.8.2
+seaborn==0.13.1
+
+# R integration (optional)
+rpy2==3.5.15
+
+# AI/ML
+ollama==0.1.6
+langchain==0.1.4
+langchain-community==0.0.16
+
+# Utilities
+python-dotenv==1.0.0
+pillow==10.2.0

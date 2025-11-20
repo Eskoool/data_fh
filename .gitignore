@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Data files (RGPD compliance - no data in repo)
+data/uploads/*
+!data/uploads/.gitkeep
+*.csv
+*.xlsx
+*.xls
+!data/examples/*.csv
+!data/examples/*.xlsx
+
+# Environment
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml
