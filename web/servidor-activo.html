@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 Servidor Activo - Análisis Farmacéutico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 700px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+        }
+
+        .status {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .status::before {
+            content: "●";
+            margin-right: 8px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        .info {
+            background: #f3f4f6;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .info h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .info p {
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .url {
+            background: #fff;
+            border: 2px solid #667eea;
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin: 10px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(245, 87, 108, 0.6);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .feature {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #e5e7eb;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .alert {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .alert strong {
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">💊</div>
+        <h1>Servidor Activo</h1>
+        <div class="status">Aplicación Lista</div>
+
+        <div class="info">
+            <h3>🎉 ¡Todo está listo!</h3>
+            <p>El servidor web está corriendo y la aplicación está disponible en:</p>
+            <div class="url">http://localhost:8080</div>
+            <p><strong>Puerto:</strong> 8080</p>
+            <p><strong>Estado:</strong> Activo y funcionando</p>
+        </div>
+
+        <div class="alert">
+            <strong>📌 Nota:</strong> Si estás en un entorno remoto o Docker, también puedes acceder usando la dirección IP del servidor en el puerto 8080.
+        </div>
+
+        <div>
+            <a href="/index.html" class="btn">🚀 Abrir Aplicación</a>
+            <a href="/README.md" class="btn btn-secondary">📖 Ver Documentación</a>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Estadísticas</div>
+                <div class="feature-desc">Descriptivas completas</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <div class="feature-title">Visualizaciones</div>
+                <div class="feature-desc">Gráficos interactivos</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔗</div>
+                <div class="feature-title">Correlaciones</div>
+                <div class="feature-desc">Matriz de Pearson</div>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🧪</div>
+                <div class="feature-title">Pruebas</div>
+                <div class="feature-desc">t-test, normalidad</div>
+            </div>
+        </div>
+
+        <div class="info" style="margin-top: 30px;">
+            <h3>🔒 Privacidad Total</h3>
+            <p>✅ Todos los datos se procesan en tu navegador</p>
+            <p>✅ No se envía nada a servidores externos</p>
+            <p>✅ Cumplimiento 100% RGPD</p>
+        </div>
+
+        <div class="footer">
+            <p><strong>Análisis de Datos Farmacéuticos v1.0</strong></p>
+            <p>100% Local • Open Source • RGPD Compliant</p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-refresh para verificar que el servidor sigue activo
+        setInterval(function() {
+            fetch('/index.html', { method: 'HEAD' })
+                .then(response => {
+                    if (!response.ok) {
+                        document.querySelector('.status').style.background = '#ef4444';
+                        document.querySelector('.status').textContent = '● Servidor Desconectado';
+                    }
+                })
+                .catch(() => {
+                    document.querySelector('.status').style.background = '#ef4444';
+                    document.querySelector('.status').textContent = '● Servidor Desconectado';
+                });
+        }, 5000);
+    </script>
+</body>
+</html>
