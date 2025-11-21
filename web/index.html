@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💊 Análisis de Datos Farmacéuticos - Versión Web</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Bibliotecas externas (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-statistics@7.8.3/dist/simple-statistics.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>💊 Análisis de Datos Farmacéuticos</h1>
+            <p class="subtitle">Versión HTML Standalone - 100% Local (RGPD)</p>
+            <div class="privacy-badge">
+                🔒 Todos los datos se procesan en tu navegador - No se envía nada a servidores
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- File Upload Section -->
+            <section id="upload-section" class="card">
+                <h2>📁 Cargar Datos</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".csv" hidden>
+                    <div class="upload-content">
+                        <div class="upload-icon">📊</div>
+                        <p class="upload-text">Arrastra un archivo CSV aquí o haz clic para seleccionar</p>
+                        <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                            Seleccionar Archivo CSV
+                        </button>
+                    </div>
+                </div>
+                <div class="example-section">
+                    <p>¿No tienes datos? <button class="btn btn-secondary" onclick="loadExampleData()">Usar Datos de Ejemplo</button></p>
+                </div>
+            </section>
+
+            <!-- Data Preview Section (Hidden initially) -->
+            <section id="preview-section" class="card" style="display: none;">
+                <h2>👁️ Vista Previa de Datos</h2>
+                <div class="data-info">
+                    <div class="info-item">
+                        <span class="info-label">Filas:</span>
+                        <span id="rowCount" class="info-value">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Columnas:</span>
+                        <span id="colCount" class="info-value">0</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Archivo:</span>
+                        <span id="fileName" class="info-value">-</span>
+                    </div>
+                </div>
+                <div class="table-container">
+                    <table id="dataTable">
+                        <thead id="tableHead"></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+                <button class="btn btn-danger" onclick="clearData()">🗑️ Limpiar Datos</button>
+            </section>
+
+            <!-- Tabs Section -->
+            <section id="analysis-section" class="card" style="display: none;">
+                <div class="tabs">
+                    <button class="tab-button active" onclick="switchTab('statistics')">📊 Estadísticas</button>
+                    <button class="tab-button" onclick="switchTab('visualizations')">📈 Visualizaciones</button>
+                    <button class="tab-button" onclick="switchTab('correlations')">🔗 Correlaciones</button>
+                    <button class="tab-button" onclick="switchTab('tests')">🧪 Pruebas Estadísticas</button>
+                </div>
+
+                <!-- Statistics Tab -->
+                <div id="statistics-tab" class="tab-content active">
+                    <h2>📊 Estadísticas Descriptivas</h2>
+                    <div class="variable-selector">
+                        <label for="statsVariable">Seleccionar Variable:</label>
+                        <select id="statsVariable" onchange="calculateStatistics()">
+                            <option value="">-- Seleccionar --</option>
+                        </select>
+                    </div>
+                    <div id="statisticsResults" class="results-container"></div>
+                </div>
+
+                <!-- Visualizations Tab -->
+                <div id="visualizations-tab" class="tab-content">
+                    <h2>📈 Visualizaciones</h2>
+                    <div class="controls-row">
+                        <div class="control-group">
+                            <label for="chartType">Tipo de Gráfico:</label>
+                            <select id="chartType" onchange="updateChartOptions()">
+                                <option value="histogram">Histograma</option>
+                                <option value="bar">Barras</option>
+                                <option value="line">Líneas</option>
+                                <option value="scatter">Dispersión</option>
+                                <option value="pie">Circular</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="vizVariable">Variable:</label>
+                            <select id="vizVariable"></select>
+                        </div>
+                        <div class="control-group" id="vizVariable2Group" style="display: none;">
+                            <label for="vizVariable2">Variable Y:</label>
+                            <select id="vizVariable2"></select>
+                        </div>
+                        <button class="btn btn-primary" onclick="createVisualization()">Generar Gráfico</button>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Correlations Tab -->
+                <div id="correlations-tab" class="tab-content">
+                    <h2>🔗 Matriz de Correlaciones</h2>
+                    <p class="info-text">Correlación de Pearson entre variables numéricas</p>
+                    <button class="btn btn-primary" onclick="calculateCorrelations()">Calcular Correlaciones</button>
+                    <div id="correlationResults" class="results-container"></div>
+                    <div class="chart-container">
+                        <canvas id="correlationChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Statistical Tests Tab -->
+                <div id="tests-tab" class="tab-content">
+                    <h2>🧪 Pruebas Estadísticas</h2>
+                    <div class="test-selector">
+                        <label for="testType">Tipo de Prueba:</label>
+                        <select id="testType" onchange="updateTestOptions()">
+                            <option value="">-- Seleccionar --</option>
+                            <option value="ttest">Prueba t (2 grupos)</option>
+                            <option value="normality">Test de Normalidad</option>
+                            <option value="comparison">Comparación de Medias</option>
+                        </select>
+                    </div>
+                    <div id="testControls" class="controls-container"></div>
+                    <div id="testResults" class="results-container"></div>
+                </div>
+            </section>
+
+            <!-- Export Section -->
+            <section id="export-section" class="card" style="display: none;">
+                <h2>💾 Exportar Resultados</h2>
+                <div class="export-buttons">
+                    <button class="btn btn-primary" onclick="exportToCSV()">📄 Exportar CSV</button>
+                    <button class="btn btn-primary" onclick="exportStatistics()">📊 Exportar Estadísticas</button>
+                    <button class="btn btn-primary" onclick="exportChart()">📈 Exportar Gráfico (PNG)</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>🔒 <strong>100% Privado y Local</strong> - Tus datos nunca salen de tu navegador</p>
+            <p class="footer-links">
+                <a href="../README.md" target="_blank">Documentación</a> |
+                <a href="../docs/guia_rapida.md" target="_blank">Guía Rápida</a> |
+                <a href="../docs/FAQ.md" target="_blank">FAQ</a> |
+                <a href="https://github.com/Eskoool/data_fh" target="_blank">GitHub</a>
+            </p>
+            <p class="version">Versión HTML 1.0 | También disponible: <a href="#" onclick="alert('Ejecuta: streamlit run app.py')">Versión Streamlit Completa</a></p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/stats.js"></script>
+    <script src="js/analyzer.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

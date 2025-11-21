@@ -2,6 +2,23 @@
 
 Sistema de análisis estadístico interactivo y minimalista para servicios de farmacia, con cumplimiento total de RGPD.
 
+## 🎯 Dos Versiones Disponibles
+
+### 🌐 Versión HTML (Sin instalación)
+**¡Abre y usa en 30 segundos!** → [Ver instrucciones](web/README.md)
+- ✅ Sin instalación de software
+- ✅ Funciona en cualquier navegador
+- ✅ Análisis básicos e intermedios
+- ✅ Ideal para uso rápido
+
+### 🐍 Versión Streamlit (Completa)
+**Sistema avanzado con IA y ML** → Continúa leyendo
+- ✅ Análisis estadísticos avanzados
+- ✅ Machine Learning (Random Forest, PCA)
+- ✅ Asistente IA generativo local (Ollama)
+- ✅ Soporte para datasets grandes
+- ✅ Integración con R (opcional)
+
 ## 🌟 Características
 
 ### ✅ Cumplimiento RGPD
